@@ -10,7 +10,7 @@ var server = http.create(function(req, res){
 			res.write(html);
 			res.end();
 		} 
-	}
+	});
 });
 
 server.listen(1337);
