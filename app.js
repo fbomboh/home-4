@@ -1,16 +1,25 @@
 // JavaScript Document
-var http = require('http'),
-	fs = require('fs');
-	
-var server = http.create(function(req, res){
-	fs.readFile('public/home-4.html', function(err, html) {
-		if(err) throw err;
-		else {
-			res.writeHeader(200, {"Content-Type": "text/html"});
-			res.write(html);
-			res.end();
-		} 
-	});
+
+
+
+var express = require('express');
+var app = express();
+var http = require('http').Server(app);
+
+//app.get('/', function(req, res) {
+//    res.send();
+// });
+
+
+app.use('/css', express.static(__dirname + '/css'));
+app.use('/js', express.static(__dirname + '/js'));
+
+app.use('/img', express.static(__dirname + '/img'));
+
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/public/home-4.html');
 });
 
-server.listen(1337);
+http.listen(1337, function(){
+        console.log('listening on *:1337');
+});
